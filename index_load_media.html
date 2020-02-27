@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+  <title>Title</title>
+  <!-- <link rel="stylesheet" type="text/css" href="./style.css"/> -->
+  <style type="text/css">
+
+body {
+  background-color: #212121;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+}
+
+#player-placeholder {
+  position: absolute;
+  margin: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 640px;
+  height: 360px;
+}
+</style>
+  <script type="text/javascript" src="kaltura-tv-player_0_52_1.js"></script>
+</head>
+<body>
+<div id="player-placeholder"></div>
+<script>
+  const ks = 'djJ8NDc4fM5xFDVgWwkjfuK_MXwkJ_40xpkZ28hkii39xscwDKaJ2ICNVIRwbMWuUCGI5m6Ieu2ewBnnKcpnmEZWaZA5nmVsM5a6uAmWqyJWNDOLJTldYhTVOQ6PZzYGO_sJ6QgUqpPiKgNyu_7n7XjLPnDUZ9pTdDHWqkoLRRrmnZhL0Ou9';
+  const player = KalturaPlayer.setup({
+    log: {
+      level: 'DEBUG'
+    },
+    targetId: 'player-placeholder',
+    provider: {
+      partnerId: 478,
+      ks: ks,
+      env: {
+        serviceUrl: 'https://rest.beeline.tv/api_v3'
+      }
+    },
+    network: {
+      responseFilter: function(type, response) {
+        console.log('response')
+        // if (type === KalturaPlayer.core.RequestType.LICENSE) {
+        //   return new Promise(function (resolve) {
+        //     console.log(response)
+        //     resolve(response); 
+        //   });
+        // }
+        return response;
+      }
+    }
+  });
+  player.loadMedia({
+    entryId: '566962',
+    // formats: ["DASH_Web", "HLS_Web"],
+    fileIds: '1254030',
+    ks: ks
+  });
+</script>
+</body>
+</html>

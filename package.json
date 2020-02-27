@@ -1,0 +1,14 @@
+{
+  "name": "kaltura_player_examples",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "http-server": "^0.11.1",
+    "http-server-ssl": "^0.0.7"
+  },
+  "scripts": {
+  	"start": "http-server .",
+    "start-ssl": "http-server-ssl -S"
+  }
+}
