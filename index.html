@@ -8,7 +8,6 @@
   <style type="text/css">
 
 body {
-  background-color: #212121;
   padding: 0;
   margin: 0;
   text-align: center;
@@ -28,40 +27,45 @@ body {
   <script type="text/javascript" src="kaltura-tv-player_0_52_1.js"></script>
 </head>
 <body>
-<div id="player-placeholder"></div>
-<script>
-  const ks = 'djJ8NDc4fM5xFDVgWwkjfuK_MXwkJ_40xpkZ28hkii39xscwDKaJ2ICNVIRwbMWuUCGI5m6Ieu2ewBnnKcpnmEZWaZA5nmVsM5a6uAmWqyJWNDOLJTldYhTVOQ6PZzYGO_sJ6QgUqpPiKgNyu_7n7XjLPnDUZ9pTdDHWqkoLRRrmnZhL0Ou9';
-  const player = KalturaPlayer.setup({
-    log: {
-      level: 'DEBUG'
-    },
-    targetId: 'player-placeholder',
-    provider: {
-      partnerId: 478,
-      ks: ks,
-      env: {
-        serviceUrl: 'https://rest.beeline.tv/api_v3'
-      }
-    },
-    network: {
-      responseFilter: function(type, response) {
-        console.log('response')
-        // if (type === KalturaPlayer.core.RequestType.LICENSE) {
-        //   return new Promise(function (resolve) {
-        //     console.log(response)
-        //     resolve(response); 
-        //   });
-        // }
-        return response;
-      }
+  <label>ks</label>
+  <input id="ks_input" name="ks">
+  <input type="button" onclick="loadPlayer()" value="Load player"/>
+  <div id="player-placeholder"></div>
+  <script>
+    function loadPlayer() {
+      const ks = document.getElementById('ks_input').value;
+      const player = KalturaPlayer.setup({
+        log: {
+          level: 'DEBUG'
+        },
+        targetId: 'player-placeholder',
+        provider: {
+          partnerId: 478,
+          ks: ks,
+          env: {
+            serviceUrl: 'https://rest.beeline.tv/api_v3'
+          }
+        },
+        network: {
+          responseFilter: function(type, response) {
+            console.log('response')
+            // if (type === KalturaPlayer.core.RequestType.LICENSE) {
+            //   return new Promise(function (resolve) {
+            //     console.log(response)
+            //     resolve(response); 
+            //   });
+            // }
+            return response;
+          }
+        }
+      });
+      player.loadMedia({
+        entryId: '566962',
+        // formats: ["DASH_Web", "HLS_Web"],
+        fileIds: '1254030',
+        ks: ks
+      });
     }
-  });
-  player.loadMedia({
-    entryId: '566962',
-    // formats: ["DASH_Web", "HLS_Web"],
-    fileIds: '1254030',
-    ks: ks
-  });
-</script>
-</body>
+  </script>
+  </body>
 </html>
